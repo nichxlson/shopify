@@ -286,6 +286,7 @@ class Api extends Component
                                 'position',
                                 'image' => [
                                     'id',
+                                    'url',
                                 ],
                                 'inventoryItem' => [
                                     'id',
