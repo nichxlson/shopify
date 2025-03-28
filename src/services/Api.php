@@ -284,6 +284,9 @@ class Api extends Component
                                 'title',
                                 'updatedAt',
                                 'position',
+                                'image' => [
+                                    'id',
+                                ],
                                 'inventoryItem' => [
                                     'id',
                                     'countryCodeOfOrigin',
