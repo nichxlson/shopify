@@ -10,6 +10,7 @@ namespace craft\shopify\enums;
 use Craft;
 use craft\enums\Color;
 use craft\helpers\Cp;
+use craft\helpers\StringHelper;
 
 /**
  * Bulk Operation Status enum
@@ -42,6 +43,16 @@ enum BulkOperationStatus: string
      */
     public function statusLabelHtml(): string
     {
+        // @TODO update this either when Craft 4 support is dropped or 4 gets enums
+		if (!class_exists(Color::class) || !method_exists(Cp::class, 'statusLabelHtml')) {
+			$color = match ($this) {
+				'ACTIVE' => 'green',
+				'ARCHIVED' => 'red',
+				default => 'orange', // takes care of draft
+			};
+			return "<span class='status $color'></span>" . StringHelper::titleize($this->statusAsLabel());
+		}
+        
         return Cp::statusLabelHtml([
             'color' => match ($this) {
                 self::Queued => Color::Gray,
